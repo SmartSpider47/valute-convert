@@ -1,0 +1,164 @@
+<!DOCTYPE HTMl>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Currency Converter</title>
+	<link rel="stylesheet" type="text/css" href="style/styles.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body style="background-color: black;">
+
+	<br>
+
+	<div>
+
+	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-telegram" viewBox="0 0 16 16" style="fill: gray;margin-left: 20px;">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+</svg>
+
+<font style="color: gray;font-weight: 500;"><a href="https://t.me/ssmart47" target="blank" style="color: gray;">@SSmart47</a></font>
+
+<button class="btn" style="float: right; margin-right: 10px;" data-toggle="modal" data-target="#exampleModal2">
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+</svg>
+</button>
+
+</div>
+<br>
+<center>
+	<div class="shadow">
+		<font style="color: white; font-weight: 900; font-size: 28px;">Currency Converter</font>
+	</div>
+	<br>
+	<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+	  <input type="number" style="font-weight: 900" id="id_cur_val">
+
+	  <div class="btn-group" role="group">
+	    <button id="btn_val_1" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal"></button>
+	    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="white" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+</svg>
+	  </div>
+    <button id="btn_val_2" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal3"></button>
+	</div>
+  <br><br>
+  <button id="btn_calc" class="btn btn-secondary">CONVERT</button>
+  <br><br>
+  <p style="color: white;background-color: rgba(192,192,192,0.1);font-weight: 700;font-size: 24px;" id="id_converted"></p>
+</center>
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-color: aqua;">
+      <div class="modal-header" style="background-color: black;">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:white;"><h5 style="color: white;">Choose Valute (from)</h5></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+          <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="background-color: black; color: white; font-weight: 500; font-size: 20px;">
+      	<my id="id_table">
+      		
+      	</my>
+      </div>
+      <div class="modal-footer" style="background-color: black;">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-color: aqua;">
+      <div class="modal-header" style="background-color: black;">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:white;"><h5 style="color: white;">Choose Valute (to)</h5></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+          <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="background-color: black; color: white; font-weight: 500; font-size: 20px;">
+        <my id="id_table_2">
+          
+        </my>
+      </div>
+      <div class="modal-footer" style="background-color: black;">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-color: aqua;">
+      <div class="modal-header" style="background-color: black;">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:white;"><h5 style="color: white;">Valute Info</h5></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+          <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="background-color: black; color: white; font-weight: 500; font-size: 20px;">
+      	
+      	<center>
+
+      	<select class="custom-select" style="background-color: black;color: white;border-color: blue;" id="id_sel_1" onchange="ChangedFirst()">
+			
+		</select>
+
+		<br>
+
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+</svg>
+		<br>
+		<p style="color: white" id="id_p_1"></p>
+
+		</center>
+
+      </div>
+      <div class="modal-body"  style="background-color: black; color: white; font-weight: 500; font-size: 20px;">
+      	
+      	<center>
+
+      	<select class="custom-select" style="background-color: black;color: white;border-color: blue;" id="id_sel_2" onchange="ChangedSecond()">
+			
+		</select>
+
+		<br>
+
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+</svg>
+		<br>
+		<p style="color: white" id="id_p_2"></p>
+
+		</center>
+
+      </div>
+      <div class="modal-footer" style="background-color: black;">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
